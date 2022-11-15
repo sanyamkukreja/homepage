@@ -19,7 +19,7 @@ from page import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hit/',views.homesite),
+    path('',views.homesite),
     path('punc/',views.puncation)
     
 ]
