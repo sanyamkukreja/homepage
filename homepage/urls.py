@@ -20,6 +20,6 @@ from page import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.homesite),
-    path('punc/',views.puncation)
+    path('punc/',views.puncation, name="punc")
     
 ]
