@@ -24,36 +24,41 @@ def puncation(request):
             if char not in punctuations:
                 analyzed=analyzed+char
         params={'purpose':'removedpuncation','analyzed_text':analyzed}
-        return render(request,'sync.html',params)
-    elif(fullcap=="on"):
+        djtext=analyzed
+        #return render(request,'sync.html',params)
+    if(fullcap=="on"):
         syncword=""
         for char in djtext:
             syncword=syncword+char.upper()
         scoop={'purpose':'uppercase','printtype':syncword}
-        return render(request,'sync.html',scoop)
+        djtext=syncword
+        #return render(request,'sync.html',scoop)
 
-    elif(remover=="on"):
+    if(remover=="on"):
         line=""
         for char in djtext:
-            if char!='\n':
+            if char!='\n' and char!='\r':
                 line=line + char
         pogo={'purpose':'lineremover','effect':line}
-        return render(request,'sync.html',pogo)
-    elif(spacetype=='on'):
+        djtext=line
+        #return render(request,'sync.html',pogo)
+    if(spacetype=='on'):
         spoke=""
         for index,char in enumerate(djtext):
             if not(djtext[index]==" " and djtext[index+1]==" "):
                 
                 spoke=spoke+char
         past={'purpose':'removedline','effectthis':spoke}
-
-        return render(request,'sync.html',past)
-    elif(count=="on"):
+        djtext=spoke
+        #return render(request,'sync.html',past)
+    if(count=="on"):
         code=0
         for index in range(len(djtext)):
             if not(djtext[index]==" "):
                 code=code+1
         sep={'purpose':"countwords",'typeshit':code}
-        return render(request,'sync.html',sep)               
+        djtext=code
+        #return render(request,'sync.html',sep)
+        return render(request,'sync.html',djtext)               
     else:
         return HttpResponse("error")          
